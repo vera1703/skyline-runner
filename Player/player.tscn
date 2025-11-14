@@ -18,3 +18,14 @@ texture = SubResource("PlaceholderTexture2D_l8h54")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("RectangleShape2D_l8h54")
+
+[node name="JumpParticles" type="CPUParticles2D" parent="Player"]
+position = Vector2(0, 10)
+emitting = false
+amount = 15
+lifetime = 0.3
+spread = 180.0
+initial_velocity_min = 40.0
+initial_velocity_max = 150.0
+scale_amount_min = 0.2
+scale_amount_max = 0.3

@@ -4,10 +4,18 @@
 [ext_resource type="PackedScene" uid="uid://pw4y8v1vd1pm" path="res://Assets/plattform_spawner.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://bojfrbrdwrctt" path="res://Platform/start_platform.tscn" id="3_8gbba"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjgbg"]
+size = Vector2(600, 40)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_jjgbg"]
+
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_jjgbg")]
-position = Vector2(40, 30)
+position = Vector2(100, 150)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
 
 [node name="PlattformSpawner" parent="." node_paths=PackedStringArray("platforms_root") instance=ExtResource("2_bo1nx")]
 platforms_root = NodePath("../PlattformRoot")
@@ -18,4 +26,3 @@ start_platform_x = 0.0
 
 [node name="PlattformRoot" type="Node2D" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="."]

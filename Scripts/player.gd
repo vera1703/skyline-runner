@@ -1,23 +1,37 @@
 extends CharacterBody2D
 
-const SPEED = 200.0
-const JUMP_FORCE = -400.0
-const GRAVITY = 900.0
+const GRAVITY := 900.0
+const SPEED := 120.0
+const JUMP_FORCE := -350.0
+
+var speed_multiplier := 1.0
 
 func _physics_process(delta):
-	# Schwerkraft
+
+	# --- LINKS ---
+	if Input.is_action_pressed("left"):
+		velocity.x = -SPEED * speed_multiplier
+		$Sprite2D.flip_h = false
+
+	# --- RECHTS ---
+	elif Input.is_action_pressed("right"):
+		velocity.x = SPEED * speed_multiplier
+		$Sprite2D.flip_h = true
+
+	# --- IDLE ---
+	else:
+		velocity.x = 0
+
+	# --- JUMP ---
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_FORCE
+
+	# --- GRAVITY ---
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
 
-	# Springen
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_FORCE
-
-	# Nach rechts laufen
-	velocity.x = SPEED
-
+	# --- MOVE ---
 	move_and_slide()
 
-	# Wenn Spieler aus dem Bild fällt → Neustart
-	if global_position.y > 800:
-		get_tree().reload_current_scene()
+	# --- SPEED WIRD IMMER SCHNELLER ---
+	speed_multiplier += 0.05 * delta
