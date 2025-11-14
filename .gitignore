@@ -1,0 +1,10 @@
+
+.godot/
+/android/
+
+.import/
+.export/
+.cache/
+
+.DS_Store
+Thumbs.db
