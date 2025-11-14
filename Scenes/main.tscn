@@ -1,8 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://cgaidnfutk71"]
+[gd_scene load_steps=4 format=3 uid="uid://cgaidnfutk71"]
 
 [ext_resource type="PackedScene" uid="uid://bi2e7qamp3tf4" path="res://Player/player.tscn" id="1_jjgbg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjgbg"]
+size = Vector2(600, 40)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_jjgbg"]
 
 [node name="Main" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_jjgbg")]
 position = Vector2(100, 150)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 300)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+modulate = Color(0.7874143, 0.13308161, 0.6691485, 1)
+self_modulate = Color(0.3328807, 0.33288068, 0.33288068, 1)
+position = Vector2(293, -45)
+shape = SubResource("RectangleShape2D_jjgbg")
+debug_color = Color(0.7055018, 0.45183963, 0.51097167, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+modulate = Color(0.42703044, 0.05958271, 0.22731298, 1)
+texture = SubResource("CanvasTexture_jjgbg")
