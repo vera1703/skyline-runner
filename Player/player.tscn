@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bjudtq0l8nio6" path="res://Scripts/player.gd" id="1_l8h54"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l8h54"]
+size = Vector2(16, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l8h54"]
 size = Vector2(16, 32)

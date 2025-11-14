@@ -14,3 +14,8 @@ config/name="Skyline Runner"
 run/main_scene="uid://cgaidnfutk71"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=124
+window/size/viewport_height=64
