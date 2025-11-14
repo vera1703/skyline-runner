@@ -6,7 +6,22 @@ const JUMP_FORCE := -350.0
 
 var speed_multiplier := 1.0
 
+# --- COYOTE TIME ---
+var coyote_time := 0.1
+var coyote_timer := 0.0
+
+# --- DOUBLE JUMP ---
+var max_jumps := 2
+var jumps_left := 2
+
 func _physics_process(delta):
+
+	# --- COYOTE TIME ---
+	if is_on_floor():
+		coyote_timer = coyote_time
+		jumps_left = max_jumps       # Sprünge zurücksetzen
+	else:
+		coyote_timer -= delta
 
 	# --- LINKS ---
 	if Input.is_action_pressed("left"):
@@ -22,9 +37,19 @@ func _physics_process(delta):
 	else:
 		velocity.x = 0
 
-	# --- JUMP ---
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_FORCE
+	# --- JUMP (auch Double Jump) ---
+	if Input.is_action_just_pressed("jump"):
+		
+		# normaler Sprung oder Sprung an Kante
+		if coyote_timer > 0 or is_on_floor():
+			velocity.y = JUMP_FORCE
+			jumps_left -= 1
+			coyote_timer = 0
+
+		# DOUBLE JUMP
+		elif jumps_left > 0:
+			velocity.y = JUMP_FORCE
+			jumps_left -= 1
 
 	# --- GRAVITY ---
 	if not is_on_floor():
