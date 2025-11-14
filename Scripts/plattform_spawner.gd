@@ -1,110 +1,157 @@
 extends Node2D
 
+# Alle möglichen Plattform-Szenen (später 10 Stück)
 @export var building_scenes: Array[PackedScene] = []
+
+# Node, unter dem alle Plattformen hängen (PlatformsRoot in Main)
 @export var platforms_root: Node2D
 
-@export var scroll_speed: float = 200.0
-@export var spawn_x: float = 800.0
+# Referenz zum Player, damit wir wissen, wie weit er ist
+@export var player: Node2D                      # 👈 NEU
 
+# Wie weit VOR dem Spieler sollen schon Plattformen existieren?
+@export var look_ahead: float = 1200.0          # 👈 NEU
+
+# Höhenbereich der Plattformen
 @export var y_min: float = 250.0
 @export var y_max: float = 350.0
 
-@export var gap_min: float = 280.0
-@export var gap_max: float = 520.0
+# Abstand zwischen Plattformen (zusätzlich zur Breite)
+@export var gap_min: float = 200.0
+@export var gap_max: float = 400.0
 
-@export var despawn_x: float = -400.0
+# Wie weit HINTER dem Spieler dürfen Plattformen bleiben,
+# bevor wir sie löschen (Performance)?
+@export var despawn_distance: float = 800.0     # 👈 NEU
 
+# Startplattform (breit, mittig)
 @export var start_platform_scene: PackedScene
 @export var start_platform_x: float = 200.0
 @export var start_platform_y: float = 350.0
 
-@export var preload_count: int = 5             # 🔹 NEU: wie viele Plattformen am Start
-
 var rng := RandomNumberGenerator.new()
 
-var distance_since_last_spawn: float = 0.0
-var next_gap: float = 400.0
-
-var last_building: Node2D = null               # 🔹 NEU: letzte Plattform merken
+# Merken, welche Plattform die zuletzt gespawnte ist
+var last_building: Node2D = null
 
 
 func _ready() -> void:
 	rng.randomize()
-	next_gap = rng.randf_range(gap_min, gap_max)
 
-	# 1) Startplattform (breit, mittig)
-	if start_platform_scene:
+	# 1) Startplattform spawnen (falls gesetzt)
+	if start_platform_scene and platforms_root:
 		var s := start_platform_scene.instantiate() as Node2D
 		platforms_root.add_child(s)
 		s.position = Vector2(start_platform_x, start_platform_y)
-		last_building = s                           # 🔹 WICHTIG: als "letzte" Plattform merken
+		last_building = s
 
-	# 2) Weitere Plattformen rechts vorspawnen – OHNE Überlappung
-	for i in range(preload_count):                 # 🔹 jetzt nur noch spawn_building()
-		spawn_building()
+	# 2) Direkt am Anfang genug Plattformen vor den Spieler legen
+	_ensure_platforms_ahead()
 
 
 func _process(delta: float) -> void:
-	if platforms_root == null:
+	if player == null or platforms_root == null:
 		return
 
-	# 1) Alle Plattformen nach links scrollen
-	for building in platforms_root.get_children():
-		building.position.x -= scroll_speed * delta
+	# Immer genug Plattformen vor dem Spieler?
+	_ensure_platforms_ahead()
 
-		if building.position.x < despawn_x:
-			building.queue_free()
-
-	# 2) Strecke hochzählen (wie weit die Welt "gelaufen" ist)
-	distance_since_last_spawn += scroll_speed * delta
-
-	# 3) Neue Plattform, wenn genug Strecke vergangen ist
-	if distance_since_last_spawn >= next_gap:
-		spawn_building()
-		distance_since_last_spawn = 0.0
-		next_gap = rng.randf_range(gap_min, gap_max)
+	# Alte Plattformen weit hinter dem Spieler löschen
+	_despawn_behind()
 
 
-func spawn_building() -> void:                    # 🔹 KOMPLETT NEU AUFGEBAUT
-	if building_scenes.is_empty() or platforms_root == null:
-		return
+# ---------------------------------------------------------
+#  GENUG PLATTFORMEN VOR DEM SPIELER
+# ---------------------------------------------------------
+
+func _ensure_platforms_ahead() -> void:
+	# Falls aus irgendeinem Grund keine letzte Plattform gesetzt ist:
+	if last_building == null:
+		var first := _spawn_building_after_x(player.global_position.x)
+		if first:
+			last_building = first
+
+	# Wir wollen, dass Plattformen mindestens bis player.x + look_ahead reichen
+	var target_x := player.global_position.x + look_ahead
+
+	# Solange die rechte Kante der letzten Plattform noch vor target_x liegt:
+	while _get_right_edge(last_building) < target_x:
+		var next := _spawn_next_building()
+		if next:
+			last_building = next
+		else:
+			break
+
+
+# Spawnt eine Plattform rechts von der letzten Plattform (mit Abstand)
+func _spawn_next_building() -> Node2D:
+	if last_building == null:
+		return _spawn_building_after_x(player.global_position.x)
+
+	var last_right := _get_right_edge(last_building)
+	var gap := rng.randf_range(gap_min, gap_max)
+
+	# Linke Kante der neuen Plattform = rechte Kante der letzten + gap
+	var left_x := last_right + gap
+	return _spawn_building_with_left_edge(left_x)
+
+
+# Erste Plattform, wenn noch keine existiert → nach Spieler
+func _spawn_building_after_x(x: float) -> Node2D:
+	var gap := rng.randf_range(gap_min, gap_max)
+	var left_x := x + gap
+	return _spawn_building_with_left_edge(left_x)
+
+
+# Spawnt neue Plattform so, dass ihre LINKE Kante bei left_x liegt
+func _spawn_building_with_left_edge(left_x: float) -> Node2D:
+	if building_scenes.is_empty():
+		return null
 
 	var index := rng.randi_range(0, building_scenes.size() - 1)
 	var scene: PackedScene = building_scenes[index]
 	if scene == null:
-		return
+		return null
 
 	var building := scene.instantiate() as Node2D
 	platforms_root.add_child(building)
 
-	# Höhe randomisieren
+	var width := _get_building_width(building)
+	var center_x := left_x + width * 0.5
 	var y := rng.randf_range(y_min, y_max)
 
-	# Breite der neuen Plattform ermitteln
-	var new_width := get_building_width(building)
-
-	var x: float
-	if last_building:
-		# rechte Kante der letzten Plattform:
-		var last_width := get_building_width(last_building)
-		var last_right := last_building.position.x + last_width * 0.5
-
-		# neue Plattform rechts daneben: letzte rechte Kante + zufälliger Abstand + halbe neue Breite
-		x = last_right + rng.randf_range(gap_min, gap_max) + new_width * 0.5
-	else:
-		# falls noch keine Plattform existiert (Sicherheitsfall)
-		x = spawn_x
-
-	building.position = Vector2(x, y)
-	last_building = building                        # 🔹 neue Plattform merken
+	building.position = Vector2(center_x, y)
+	return building
 
 
-func get_building_width(building: Node2D) -> float: # 🔹 NEU: Breite aus Sprite holen
-	# Erwartung: Jede Plattform-Szene hat einen Knoten "Sprite2D"
+# ---------------------------------------------------------
+#  PLATFORMEN HINTER DEM SPIELER LÖSCHEN
+# ---------------------------------------------------------
+
+func _despawn_behind() -> void:
+	var limit_x := player.global_position.x - despawn_distance
+
+	for b in platforms_root.get_children():
+		# rechte Kante der Plattform
+		var right := _get_right_edge(b)
+		if right < limit_x and b != last_building:
+			b.queue_free()
+
+
+# ---------------------------------------------------------
+#  HILFSFUNKTIONEN: BREITE UND RECHTE KANTE
+# ---------------------------------------------------------
+
+func _get_building_width(building: Node2D) -> float:
 	var sprite := building.get_node_or_null("Sprite2D")
 	if sprite and sprite is Sprite2D and sprite.texture:
 		var s := sprite as Sprite2D
 		return s.texture.get_width() * s.scale.x
 
-	# Fallback, falls kein Sprite gefunden wird
+	# Fallback, falls kein Sprite gefunden:
 	return 200.0
+
+
+func _get_right_edge(building: Node2D) -> float:
+	var w := _get_building_width(building)
+	return building.position.x + w * 0.5
