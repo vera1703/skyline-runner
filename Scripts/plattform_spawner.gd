@@ -216,6 +216,8 @@ func _spawn_coins_on_building(building: Node2D, platform_center_x: float, platfo
 	if coin_count == 0:
 		return
 	
+	var building_height := _get_building_height(building)
+	
 	# Für jeden Coin eine Instanz erstellen
 	for i in range(coin_count):
 		var coin := coin_scene.instantiate() as Node2D
@@ -230,13 +232,14 @@ func _spawn_coins_on_building(building: Node2D, platform_center_x: float, platfo
 		var x_offset := rng.randf_range(-platform_width * 0.3, platform_width * 0.3)
 		var coin_x := platform_center_x + x_offset
 		
-		# Sie fallen dann mit Gravity auf die CollisionShape2D der Gebäude
-		var coin_y := platform_y - 150.0
+		# platform_y ist die Mitte des Gebäudes, also ziehen wir die halbe Höhe ab
+		# und fügen dann coin_height_offset hinzu, um den Coin über dem Gebäude zu platzieren
+		var coin_y := platform_y - (building_height * 0.5) - coin_height_offset
 		
 		coin.position = Vector2(coin_x, coin_y)
 		
 		if debug_enabled:
-			print("[DEBUG] Coin ", i + 1, " von ", coin_count, " gespawnt bei x=", coin_x, ", y=", coin_y, " und fällt auf Gebäude")
+			print("[DEBUG] Coin ", i + 1, " von ", coin_count, " gespawnt bei x=", coin_x, ", y=", coin_y, " (Gebäudehöhe: ", building_height, ")")
 
 
 func _despawn_behind() -> void:

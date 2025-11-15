@@ -3,10 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://ba13sidenw00r" path="res://Assets/building_4.png" id="1_k2q1w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d1l1p"]
-size = Vector2(259, 195)
+size = Vector2(425, 357)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wmmns"]
-size = Vector2(59, 52)
+size = Vector2(99, 58)
 
 [sub_resource type="Gradient" id="Gradient_k2q1w"]
 
@@ -14,24 +14,22 @@ size = Vector2(59, 52)
 gradient = SubResource("Gradient_k2q1w")
 
 [node name="Building4" type="StaticBody2D"]
-scale = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.000001, -25)
-scale = Vector2(1.169051, 1.2085366)
+scale = Vector2(1.934, 2)
 texture = ExtResource("1_k2q1w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-1.5, -18.5)
+position = Vector2(-1.5, 3.5)
 shape = SubResource("RectangleShape2D_d1l1p")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(2.5, -122)
+position = Vector2(6, -202)
 shape = SubResource("RectangleShape2D_wmmns")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(-32.5, -49.5)
 scale = Vector2(0.07812499, 0.2578126)
 texture = SubResource("GradientTexture2D_d1l1p")
