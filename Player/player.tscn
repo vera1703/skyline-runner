@@ -29,3 +29,11 @@ initial_velocity_min = 40.0
 initial_velocity_max = 150.0
 scale_amount_min = 0.2
 scale_amount_max = 0.3
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-100, -150)
+process_callback = 0
+limit_enabled = false
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
