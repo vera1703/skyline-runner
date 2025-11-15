@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgaidnfutk71"]
+[gd_scene load_steps=10 format=3 uid="uid://cgaidnfutk71"]
 
 [ext_resource type="PackedScene" uid="uid://bi2e7qamp3tf4" path="res://Player/player.tscn" id="1_jjgbg"]
-[ext_resource type="PackedScene" uid="uid://pw4y8v1vd1pm" path="res://Assets/plattform_spawner.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://pw4y8v1vd1pm" path="res://Platform/plattform_spawner.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://bojfrbrdwrctt" path="res://Platform/start_platform.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://cjkaol6gt8u3f" path="res://Platform/building_1.tscn" id="3_344ge"]
 [ext_resource type="PackedScene" uid="uid://dsmgj2njyf34y" path="res://Scenes/pause_menu.tscn" id="4_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://dbmaods8l2t04" path="res://Platform/building_2.tscn" id="4_ynf5e"]
+[ext_resource type="PackedScene" uid="uid://dowpia35fgobe" path="res://Platform/building_3.tscn" id="5_hptm8"]
+[ext_resource type="PackedScene" uid="uid://c4usqpped0rsq" path="res://Platform/building_4.tscn" id="6_d1ilt"]
 
 [sub_resource type="GDScript" id="GDScript_jjvhh"]
 script/source = "extends Node2D
@@ -24,6 +28,7 @@ script = SubResource("GDScript_jjvhh")
 position = Vector2(100, 150)
 
 [node name="PlatformSpawner" parent="." node_paths=PackedStringArray("platforms_root", "player") instance=ExtResource("2_bo1nx")]
+building_scenes = Array[PackedScene]([ExtResource("3_344ge"), ExtResource("4_ynf5e"), ExtResource("5_hptm8"), ExtResource("6_d1ilt")])
 platforms_root = NodePath("../PlatformRoot")
 player = NodePath("../Player")
 gap_min = 50.0
