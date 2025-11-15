@@ -1,10 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgaidnfutk71"]
+[gd_scene load_steps=6 format=3 uid="uid://cgaidnfutk71"]
 
 [ext_resource type="PackedScene" uid="uid://bi2e7qamp3tf4" path="res://Player/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://pw4y8v1vd1pm" path="res://Assets/plattform_spawner.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://bojfrbrdwrctt" path="res://Platform/start_platform.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://dsmgj2njyf34y" path="res://Scenes/pause_menu.tscn" id="4_jjvhh"]
+
+[sub_resource type="GDScript" id="GDScript_jjvhh"]
+script/source = "extends Node2D
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	if Input.is_action_just_pressed(\"pause\"):
+		pass
+		
+func pauseMenu():
+	pass
+"
 
 [node name="Main" type="Node2D"]
+script = SubResource("GDScript_jjvhh")
 
 [node name="Player" parent="." instance=ExtResource("1_jjgbg")]
 position = Vector2(100, 150)
@@ -18,3 +32,5 @@ start_platform_scene = ExtResource("3_8gbba")
 start_platform_x = 0.0
 
 [node name="PlatformRoot" type="Node2D" parent="."]
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_jjvhh")]
