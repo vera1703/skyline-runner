@@ -140,6 +140,7 @@ scale_amount_max = 0.3
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-100, -150)
+offset = Vector2(0, 100)
 process_callback = 0
 limit_bottom = 500
 limit_smoothed = true

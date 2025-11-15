@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cgaidnfutk71"]
+[gd_scene load_steps=13 format=3 uid="uid://cgaidnfutk71"]
 
 [ext_resource type="PackedScene" uid="uid://bi2e7qamp3tf4" path="res://Player/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://pw4y8v1vd1pm" path="res://Platform/plattform_spawner.tscn" id="2_bo1nx"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dbmaods8l2t04" path="res://Platform/building_2.tscn" id="4_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://dowpia35fgobe" path="res://Platform/building_3.tscn" id="5_hptm8"]
 [ext_resource type="PackedScene" uid="uid://c4usqpped0rsq" path="res://Platform/building_4.tscn" id="6_d1ilt"]
+[ext_resource type="PackedScene" uid="uid://dd53ktg4pcqkt" path="res://Platform/building_5.tscn" id="7_d1ilt"]
+[ext_resource type="PackedScene" uid="uid://dosrjfuy6t7kv" path="res://Platform/Building_6.tscn" id="8_6iyac"]
 [ext_resource type="PackedScene" uid="uid://nsaladxbu47h" path="res://Scenes/coin.tscn" id="9_ynf5e"]
 
 [sub_resource type="GDScript" id="GDScript_jjvhh"]
@@ -29,20 +31,17 @@ script = SubResource("GDScript_jjvhh")
 position = Vector2(100, 150)
 
 [node name="PlatformSpawner" parent="." node_paths=PackedStringArray("platforms_root", "player") instance=ExtResource("2_bo1nx")]
-building_scenes = Array[PackedScene]([ExtResource("3_344ge"), ExtResource("4_ynf5e"), ExtResource("5_hptm8"), ExtResource("6_d1ilt")])
+building_scenes = Array[PackedScene]([ExtResource("3_344ge"), ExtResource("4_ynf5e"), ExtResource("5_hptm8"), ExtResource("6_d1ilt"), ExtResource("7_d1ilt"), ExtResource("8_6iyac")])
 coin_scene = ExtResource("9_ynf5e")
 platforms_root = NodePath("../PlatformRoot")
 player = NodePath("../Player")
-look_ahead = 1200.0
 y_min = 300.0
 y_max = 400.0
 max_height_difference = 70.0
 gap_min = 50.0
 gap_max = 70.0
-despawn_distance = 800.0
 start_platform_scene = ExtResource("3_8gbba")
 start_platform_x = 0.0
-start_platform_y = 350.0
 
 [node name="PlatformRoot" type="Node2D" parent="."]
 
