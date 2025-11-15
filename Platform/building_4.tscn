@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4usqpped0rsq"]
+[gd_scene load_steps=6 format=3 uid="uid://c4usqpped0rsq"]
 
 [ext_resource type="Texture2D" uid="uid://ba13sidenw00r" path="res://Assets/building_4.png" id="1_k2q1w"]
 
@@ -8,7 +8,13 @@ size = Vector2(259, 195)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wmmns"]
 size = Vector2(59, 52)
 
+[sub_resource type="Gradient" id="Gradient_k2q1w"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d1l1p"]
+gradient = SubResource("Gradient_k2q1w")
+
 [node name="Building4" type="StaticBody2D"]
+scale = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.000001, -25)
@@ -16,9 +22,16 @@ scale = Vector2(1.169051, 1.2085366)
 texture = ExtResource("1_k2q1w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-1.5, -18.5)
 shape = SubResource("RectangleShape2D_d1l1p")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(2.5, -122)
 shape = SubResource("RectangleShape2D_wmmns")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(-32.5, -49.5)
+scale = Vector2(0.07812499, 0.2578126)
+texture = SubResource("GradientTexture2D_d1l1p")

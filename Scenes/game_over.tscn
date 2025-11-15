@@ -5,7 +5,7 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_i2yjh"]
 font_size = 100
-font_color = Color(0.11764706, 0.22745098, 1, 1)
+font_color = Color(3.046, 5.018, 18.892, 1)
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -20,7 +20,7 @@ metadata/_edit_horizontal_guides_ = [-20.0]
 layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
-color = Color(0.7019608, 0.11372549, 0.09411765, 0.4509804)
+color = Color(0, 0.1347436, 0.24864486, 0.4509804)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
