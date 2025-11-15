@@ -2,6 +2,7 @@ extends Node2D
 
 # Alle möglichen Plattform-Szenen
 @export var building_scenes: Array[PackedScene] = []
+@export var coin_scene: PackedScene
 
 # Node, unter dem alle Plattformen hängen
 @export var platforms_root: Node2D
@@ -40,6 +41,11 @@ var last_platform_y: float = 0.0
 var debug_enabled: bool = true
 var debug_frame_count: int = 0
 var last_player_x: float = 0.0
+
+
+@export var coin_height_offset: float = 50.0  # Erhöht von 30.0 auf 50.0 für bessere Positionierung
+
+var max_coins_per_platform: int = 3
 
 
 func _ready() -> void:
@@ -189,10 +195,48 @@ func _spawn_next_building() -> bool:
 	last_platform_right_x = center_x + width * 0.5
 	last_platform_y = y
 	
+	# Coins auf der Plattform spawnen
+	_spawn_coins_on_building(building, center_x, y, width)
+	
 	if debug_enabled:
 		print("[DEBUG] Plattform gespawnt bei x=", center_x, ", y=", y, " (Breite: ", width, "). Rechte Kante: ", old_right, " -> ", last_platform_right_x)
 	
 	return true
+
+
+# Neue Funktion: Coins auf Plattform spawnen
+func _spawn_coins_on_building(building: Node2D, platform_center_x: float, platform_y: float, platform_width: float) -> void:
+	if coin_scene == null:
+		print("[DEBUG] WARNUNG: coin_scene ist nicht gesetzt! Keine Coins gespawnt.")
+		return
+	
+	# Zufällige Anzahl Coins: 0–3
+	var coin_count := rng.randi_range(0, max_coins_per_platform)
+	
+	if coin_count == 0:
+		return
+	
+	# Für jeden Coin eine Instanz erstellen
+	for i in range(coin_count):
+		var coin := coin_scene.instantiate() as Node2D
+		if coin == null:
+			print("[DEBUG] FEHLER: Konnte Coin nicht instanzieren!")
+			continue
+		
+		# Coin zum platforms_root hinzufügen (für einfaches Cleanup)
+		platforms_root.add_child(coin)
+		
+		# Zufällige X-Position auf der Plattform (±etwas vom Rand weg)
+		var x_offset := rng.randf_range(-platform_width * 0.3, platform_width * 0.3)
+		var coin_x := platform_center_x + x_offset
+		
+		# Sie fallen dann mit Gravity auf die CollisionShape2D der Gebäude
+		var coin_y := platform_y - 150.0
+		
+		coin.position = Vector2(coin_x, coin_y)
+		
+		if debug_enabled:
+			print("[DEBUG] Coin ", i + 1, " von ", coin_count, " gespawnt bei x=", coin_x, ", y=", coin_y, " und fällt auf Gebäude")
 
 
 func _despawn_behind() -> void:
@@ -228,6 +272,19 @@ func _get_building_width(building: Node2D) -> float:
 	
 	# Fallback
 	return 200.0
+
+
+func _get_building_height(building: Node2D) -> float:
+	if building == null or not is_instance_valid(building):
+		return 300.0  # Fallback-Höhe
+	
+	var sprite := building.get_node_or_null("Sprite2D")
+	if sprite and sprite is Sprite2D and sprite.texture:
+		var s := sprite as Sprite2D
+		return s.texture.get_height() * s.scale.y
+	
+	# Fallback
+	return 300.0
 
 
 func _get_right_edge(building: Node2D) -> float:

@@ -116,7 +116,7 @@ size = Vector2(36.25, 68)
 
 [node name="Player" type="Node2D"]
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 script = ExtResource("1_l8h54")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
