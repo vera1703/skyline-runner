@@ -14,6 +14,9 @@ var coyote_timer := 0.0
 var max_jumps := 2
 var jumps_left := 2
 func _physics_process(delta):
+	
+	if position.y > 900:
+		get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
 
 	# --- COYOTE TIME ---
 	if is_on_floor():
