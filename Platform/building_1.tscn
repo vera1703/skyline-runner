@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjkaol6gt8u3f"]
+
+[ext_resource type="Texture2D" uid="uid://dbg6tj14mc7e3" path="res://Assets/building_1.png" id="1_2vs1h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2vs1h"]
+size = Vector2(372, 444)
+
+[node name="Building1" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_2vs1h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-15, 33)
+shape = SubResource("RectangleShape2D_2vs1h")

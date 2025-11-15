@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://pw4y8v1vd1pm"]
+
+[ext_resource type="Script" uid="uid://ei4wv0oitdai" path="res://Scripts/plattform_spawner.gd" id="1_ble7u"]
+[ext_resource type="PackedScene" uid="uid://cjkaol6gt8u3f" path="res://Platform/building_1.tscn" id="2_xkbbu"]
+[ext_resource type="PackedScene" uid="uid://dbmaods8l2t04" path="res://Platform/building_2.tscn" id="3_gnamb"]
+
+[node name="PlattformSpawner" type="Node2D"]
+script = ExtResource("1_ble7u")
+building_scenes = Array[PackedScene]([ExtResource("2_xkbbu"), ExtResource("3_gnamb")])
+gap_min = 250.0
+gap_max = 450.0
+start_platform_x = 300.0
+
+[node name="Building1" type="StaticBody2D" parent="."]
