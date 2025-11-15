@@ -13,7 +13,6 @@ var coyote_timer := 0.0
 # --- DOUBLE JUMP ---
 var max_jumps := 2
 var jumps_left := 2
-
 func _physics_process(delta):
 
 	# --- COYOTE TIME ---
