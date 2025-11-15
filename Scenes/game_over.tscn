@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvlf5bxmj1p6x"]
+
+[ext_resource type="Script" uid="uid://b2ljfd4mdgrsi" path="res://Scripts/restart.gd" id="1_ojehl"]
+[ext_resource type="Script" uid="uid://d2pets86ue323" path="res://Scripts/quit.gd" id="2_8fo1c"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_i2yjh"]
+font_size = 100
+font_color = Color(0.11764706, 0.22745098, 1, 1)
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_horizontal_guides_ = [-20.0]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.7019608, 0.11372549, 0.09411765, 0.4509804)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 158.0
+offset_right = 1161.0
+offset_bottom = 392.0
+text = "Game Over "
+label_settings = SubResource("LabelSettings_i2yjh")
+
+[node name="Restart" type="Button" parent="."]
+layout_mode = 0
+offset_left = 457.0
+offset_top = 355.0
+offset_right = 757.0
+offset_bottom = 405.0
+theme_override_font_sizes/font_size = 20
+text = "Restart"
+script = ExtResource("1_ojehl")
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 460.0
+offset_top = 439.0
+offset_right = 760.0
+offset_bottom = 489.0
+theme_override_font_sizes/font_size = 20
+text = "Quit"
+script = ExtResource("2_8fo1c")
+
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
