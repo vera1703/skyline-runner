@@ -17,14 +17,9 @@ config/icon="res://icon.svg"
 
 [display]
 
-<<<<<<< HEAD
-window/size/viewport_width=124
-window/size/viewport_height=64
-=======
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/resizable=false
->>>>>>> ae284f1b7b83ec39ab084d1e538f62594df6e4d4
 
 [input]
 
