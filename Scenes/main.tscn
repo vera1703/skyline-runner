@@ -1,5 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://cgaidnfutk71"]
 
+[ext_resource type="Script" uid="uid://dn8e7c82yggso" path="res://Scripts/main.gd" id="1_6iyac"]
 [ext_resource type="PackedScene" uid="uid://bi2e7qamp3tf4" path="res://Player/player.tscn" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://pw4y8v1vd1pm" path="res://Platform/plattform_spawner.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://bojfrbrdwrctt" path="res://Platform/start_platform.tscn" id="3_8gbba"]
@@ -12,20 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://dosrjfuy6t7kv" path="res://Platform/Building_6.tscn" id="8_6iyac"]
 [ext_resource type="PackedScene" uid="uid://nsaladxbu47h" path="res://Scenes/coin.tscn" id="9_ynf5e"]
 
-[sub_resource type="GDScript" id="GDScript_jjvhh"]
-script/source = "extends Node2D
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_just_pressed(\"pause\"):
-		pass
-		
-func pauseMenu():
-	pass
-"
-
 [node name="Main" type="Node2D"]
-script = SubResource("GDScript_jjvhh")
+script = ExtResource("1_6iyac")
 
 [node name="Player" parent="." instance=ExtResource("1_jjgbg")]
 position = Vector2(100, 150)
@@ -46,3 +35,13 @@ start_platform_x = 0.0
 [node name="PlatformRoot" type="Node2D" parent="."]
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_jjvhh")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
+offset_left = 1140.0
+offset_top = 34.0
+offset_right = 1201.0
+offset_bottom = 57.0
+theme_override_font_sizes/font_size = 20
+text = "Coins: 0"

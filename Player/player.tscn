@@ -119,6 +119,16 @@ size = Vector2(36.25, 68)
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 script = ExtResource("1_l8h54")
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(-100, -150)
+offset = Vector2(0, 100)
+process_callback = 0
+limit_bottom = 500
+limit_smoothed = true
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 sprite_frames = SubResource("SpriteFrames_pisgm")
 animation = &"idle"
@@ -137,13 +147,3 @@ initial_velocity_min = 40.0
 initial_velocity_max = 150.0
 scale_amount_min = 0.2
 scale_amount_max = 0.3
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(-100, -150)
-offset = Vector2(0, 100)
-process_callback = 0
-limit_bottom = 500
-limit_smoothed = true
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true

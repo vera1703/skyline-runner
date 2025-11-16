@@ -7,8 +7,8 @@ func _ready():
 
 func _on_body_entered(body):
 	if body.is_in_group("player"):
-		# Get the ScoreLabel node and add score
-		var score_label = get_tree().get_first_node_in_group("score_label")
-		if score_label:
-			score_label.add_score(value)
+		var main = get_tree().current_scene
+		
+		if main and main.has_method("add_score"):
+			main.add_score(value)
 		queue_free()
