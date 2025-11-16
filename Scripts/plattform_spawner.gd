@@ -27,7 +27,7 @@ var camera: Camera2D = null
 @export var gap_max: float = 400.0
 
 # Wie weit HINTER dem Spieler dürfen Plattformen bleiben?
-@export var despawn_distance: float = 800.0
+@export var despawn_distance: float = 900.0
 
 # Startplattform
 @export var start_platform_scene: PackedScene

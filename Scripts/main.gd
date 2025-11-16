@@ -2,7 +2,7 @@ extends Node2D
 
 var score: int = 0
 
-@onready var score_label: Label = $CanvasLayer/ScoreLabel
+@onready var score_label: Label = $CanvasLayer/Control/Control/ScoreLabel
 @onready var game_over_menu: Control = $CanvasLayer2/GameOver
 
 func _process(delta):

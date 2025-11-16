@@ -1,15 +1,13 @@
-extends Node2D
+extends Control
+
 
 func _ready():
 	get_tree().paused = false
 	
 func _on_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/main.tscn")
-
-
-func _on_options_pressed() -> void:
-	get_tree().change_scene_to_file("")
-
-
+	print ("Pressed")
+	
 func _on_quit_pressed() -> void:
 	get_tree().quit()
+	

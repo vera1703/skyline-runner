@@ -3,13 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://c13ddbmn4pue7" path="res://Assets/building_5.png" id="1_otsjc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ry76h"]
-size = Vector2(128, 431)
+size = Vector2(253, 734)
 
 [node name="Building5" type="StaticBody2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
 texture = ExtResource("1_otsjc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 40.5)
+position = Vector2(0, 56)
 shape = SubResource("RectangleShape2D_ry76h")

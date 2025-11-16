@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://lspjj6ltuk1a"
+path="res://.godot/imported/kf039204-true-heart.wav-3ce0c01934dac84af30f1763b89e6c94.sample"
+
+[deps]
+
+source_file="res://audio/music/Music Scene 01/kf039204-true-heart.wav"
+dest_files=["res://.godot/imported/kf039204-true-heart.wav-3ce0c01934dac84af30f1763b89e6c94.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

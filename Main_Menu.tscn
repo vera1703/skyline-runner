@@ -1,0 +1,103 @@
+[gd_scene load_steps=3 format=3 uid="uid://belseq47xomt1"]
+
+[ext_resource type="Script" uid="uid://ckqeqv73sekhx" path="res://Scripts/main_menu.gd" id="1_wugcc"]
+[ext_resource type="Texture2D" uid="uid://clcxg557wba4n" path="res://Assets/businessman.png" id="2_gtid3"]
+
+[node name="Main_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wugcc")
+
+[node name="ButtonManager" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ButtonManager"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.19215687, 0.22352941, 0.28235295, 1)
+
+[node name="Content" type="Control" parent="ButtonManager"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ButtonManager/Content"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -231.5
+offset_top = -44.0
+offset_right = 231.5
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="ButtonManager/Content/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Skyline Runner"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ButtonManager/Content/VBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("2_gtid3")
+expand_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ButtonManager/Content"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -50.5
+offset_right = -80.0
+offset_bottom = 50.5
+grow_horizontal = 0
+grow_vertical = 2
+alignment = 1
+
+[node name="Start" type="Button" parent="ButtonManager/Content/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "START
+"
+icon_alignment = 1
+
+[node name="nothing" type="Button" parent="ButtonManager/Content/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+text = "nothing
+"
+
+[node name="Quit" type="Button" parent="ButtonManager/Content/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "QUIT
+"
+
+[connection signal="pressed" from="ButtonManager/Content/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="ButtonManager/Content/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

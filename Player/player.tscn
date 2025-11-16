@@ -123,6 +123,7 @@ script = ExtResource("1_l8h54")
 position = Vector2(-100, -150)
 offset = Vector2(0, 100)
 process_callback = 0
+limit_right = 10152650
 limit_bottom = 500
 limit_smoothed = true
 position_smoothing_enabled = true

@@ -1,6 +1,7 @@
 extends Control
 
-@onready var coins_label: Label = $CoinsLabel
+@onready var coins_label: Label = $Control/VBoxContainer/CoinsLabel
+
 
 func set_coins(amount: int) -> void:
 	coins_label.text = "Your Score: %d" % amount

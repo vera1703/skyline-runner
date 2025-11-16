@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cgaidnfutk71"]
+[gd_scene load_steps=16 format=3 uid="uid://cgaidnfutk71"]
 
 [ext_resource type="Script" uid="uid://dn8e7c82yggso" path="res://Scripts/main.gd" id="1_6iyac"]
 [ext_resource type="PackedScene" uid="uid://bi2e7qamp3tf4" path="res://Player/player.tscn" id="1_jjgbg"]
@@ -13,9 +13,21 @@
 [ext_resource type="PackedScene" uid="uid://dosrjfuy6t7kv" path="res://Platform/Building_6.tscn" id="8_6iyac"]
 [ext_resource type="PackedScene" uid="uid://nsaladxbu47h" path="res://Scenes/coin.tscn" id="9_ynf5e"]
 [ext_resource type="PackedScene" uid="uid://dvlf5bxmj1p6x" path="res://Scenes/game_over.tscn" id="13_fdnlq"]
+[ext_resource type="AudioStream" uid="uid://lspjj6ltuk1a" path="res://audio/music/Music Scene 01/kf039204-true-heart.wav" id="14_jkdf5"]
+[ext_resource type="Texture2D" uid="uid://ci3od1xaf3kcj" path="res://Assets/background.png" id="15_wsu2k"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_6iyac")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 1)
+motion_mirroring = Vector2(2000, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(903, 35)
+texture = ExtResource("15_wsu2k")
 
 [node name="Player" parent="." instance=ExtResource("1_jjgbg")]
 position = Vector2(100, 150)
@@ -25,11 +37,9 @@ building_scenes = Array[PackedScene]([ExtResource("3_344ge"), ExtResource("4_ynf
 coin_scene = ExtResource("9_ynf5e")
 platforms_root = NodePath("../PlatformRoot")
 player = NodePath("../Player")
-y_min = 300.0
-y_max = 400.0
-max_height_difference = 70.0
-gap_min = 50.0
-gap_max = 70.0
+y_min = 500.0
+gap_min = 90.0
+gap_max = 200.0
 start_platform_scene = ExtResource("3_8gbba")
 start_platform_x = 0.0
 
@@ -41,18 +51,41 @@ start_platform_x = 0.0
 
 [node name="GameOver" parent="CanvasLayer2" instance=ExtResource("13_fdnlq")]
 process_mode = 3
-anchors_preset = 9
-anchor_right = 0.0
-offset_left = 1.0
-offset_right = 1.0
-grow_horizontal = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="ScoreLabel" type="Label" parent="CanvasLayer"]
-offset_left = 1140.0
-offset_top = 34.0
-offset_right = 1201.0
-offset_bottom = 57.0
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+
+[node name="Control" type="Control" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -254.0
+offset_bottom = 135.0
+grow_horizontal = 0
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/Control/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -14.0
+offset_right = 38.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_font_sizes/font_size = 20
 text = "Coins: 0"
+
+[node name="Kf039204TrueHeart" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_jkdf5")
+autoplay = true

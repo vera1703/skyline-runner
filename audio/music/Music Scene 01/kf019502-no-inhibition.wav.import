@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://djhk1vg4q30g0"
+path="res://.godot/imported/kf019502-no-inhibition.wav-1a981fdd8119c154828aaa82eb3e901a.sample"
+
+[deps]
+
+source_file="res://audio/music/Music Scene 01/kf019502-no-inhibition.wav"
+dest_files=["res://.godot/imported/kf019502-no-inhibition.wav-1a981fdd8119c154828aaa82eb3e901a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

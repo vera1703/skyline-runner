@@ -15,6 +15,11 @@ gradient = SubResource("Gradient_k2q1w")
 
 [node name="Building4" type="StaticBody2D"]
 
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-1, 291.5)
+scale = Vector2(1.934, 2)
+texture = ExtResource("1_k2q1w")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1.000001, -25)
 scale = Vector2(1.934, 2)
