@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cg0kd17mj0ucy"]
+[gd_scene load_steps=3 format=3 uid="uid://cg0kd17mj0ucy"]
 
 [ext_resource type="PackedScene" uid="uid://belseq47xomt1" path="res://Main_Menu.tscn" id="1_28flt"]
+[ext_resource type="AudioStream" uid="uid://c6bejk3ivxwnx" path="res://audio/music/Music Scene 01/kf038107-space-hero.wav" id="1_48xlc"]
 
 [node name="MainMenu" type="Node2D"]
+
+[node name="Kf038107SpaceHero" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_48xlc")
+autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
