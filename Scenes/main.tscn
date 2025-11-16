@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cgaidnfutk71"]
+[gd_scene load_steps=14 format=3 uid="uid://cgaidnfutk71"]
 
 [ext_resource type="Script" uid="uid://dn8e7c82yggso" path="res://Scripts/main.gd" id="1_6iyac"]
 [ext_resource type="PackedScene" uid="uid://bi2e7qamp3tf4" path="res://Player/player.tscn" id="1_jjgbg"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dd53ktg4pcqkt" path="res://Platform/building_5.tscn" id="7_d1ilt"]
 [ext_resource type="PackedScene" uid="uid://dosrjfuy6t7kv" path="res://Platform/Building_6.tscn" id="8_6iyac"]
 [ext_resource type="PackedScene" uid="uid://nsaladxbu47h" path="res://Scenes/coin.tscn" id="9_ynf5e"]
+[ext_resource type="PackedScene" uid="uid://dvlf5bxmj1p6x" path="res://Scenes/game_over.tscn" id="13_fdnlq"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_6iyac")
@@ -35,6 +36,16 @@ start_platform_x = 0.0
 [node name="PlatformRoot" type="Node2D" parent="."]
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_jjvhh")]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="GameOver" parent="CanvasLayer2" instance=ExtResource("13_fdnlq")]
+process_mode = 3
+anchors_preset = 9
+anchor_right = 0.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

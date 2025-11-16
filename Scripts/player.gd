@@ -19,7 +19,10 @@ var jumps_left := 2
 
 func _physics_process(delta):
 	if position.y > 900:
-		get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
+		var main = get_tree().current_scene
+		if main and main.has_method("game_over"):
+			main.game_over()
+			return  
 
 	# --- COYOTE TIME ---
 	if is_on_floor():
