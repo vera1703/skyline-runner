@@ -4,8 +4,8 @@ extends CharacterBody2D
 
 const GRAVITY := 900.0
 const SPEED := 120.0
-const JUMP_FORCE := -475.0
-const MAX_SPEED_MULTIPLIER := 2.5  
+const JUMP_FORCE := -520.0
+const MAX_SPEED_MULTIPLIER := 4.0 
 
 var speed_multiplier := 1.0
 
