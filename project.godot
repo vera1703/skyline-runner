@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Skyline Runner"
-run/main_scene="uid://cgaidnfutk71"
+run/main_scene="uid://cg0kd17mj0ucy"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

@@ -133,6 +133,7 @@ drag_vertical_enabled = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 sprite_frames = SubResource("SpriteFrames_pisgm")
 animation = &"idle"
+frame_progress = 0.58650166
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(1, 2)
